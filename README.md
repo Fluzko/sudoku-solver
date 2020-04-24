@@ -19,7 +19,8 @@ The actual algorithms for solving are: naive or "brute force", [backtracking](ht
 cd sudoku-solver
 python3 run.py
 ```
-
+![](./imgs/config.png)
+![](./imgs/graph.png)
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
