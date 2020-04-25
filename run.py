@@ -1,12 +1,13 @@
 from sudoku import sudoku as sk, algorithm as alg, graph as gp
-from algorithms import backtrack
+from algorithms import backtrack, bruteForce
 from graphs import console
 import sys
 
 
 def get_solver(string_solver):
     possible_solvers = [
-        ('backtrack', backtrack.Backtrack)
+        ('backtrack', backtrack.Backtrack),
+        ('naive', bruteForce.BruteForce)
     ]
     solver = None
     for s in possible_solvers:
@@ -22,7 +23,7 @@ def get_solver(string_solver):
 
 def get_graph(string_graph):
     possible_graphs = [
-        ('console', console.ConsoleGraph)
+        ('console', console.ConsoleGraph),
     ]
     graph = None
     for g in possible_graphs:
