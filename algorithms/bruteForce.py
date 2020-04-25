@@ -1,32 +1,37 @@
 import sys
 import copy
+import numpy as np
 
 
 class BruteForce:
     def __init__(self, sudoku):
         self.board = sudoku
         self.max_solution = 0
+        sys.setrecursionlimit(999999999)
 
     def solve(self):
-        solution = self.__initial_solution__()
-        self.max_solution = self.__initial_solution__() * 9
-        if not self.__valid_solution__(solution):
-            self.__solve__(self.__next_solution__(solution))
-        else:
-            self.board = solution
-
+        self.__solve__()
         return self.board
 
-    def __solve__(self, solution):
-        if not solution:
-            print('No se encontro solucion')
-            sys.exit()
+    def __solve__(self):
+        solution = self.__initial_solution__()
+        self.max_solution = solution * 9
+        while solution:
+            if self.__valid_solution__(solution):
+                self.board = self.__apply_solution(solution)
+                return
+            solution = self.__next_solution__(solution)
 
-        if self.__valid_solution__(solution):
-            self.board = self.__apply_solution(solution)
-            return
+        print('No se encontro solucion posible')
+        sys.exit()
 
-        self.__solve__(self.__next_solution__(solution))
+    def __all_solutions__(self):
+        solutions = [self.__initial_solution__()]
+        while self.__next_solution__(solutions[-1]):
+            new_sol = self.__next_solution__(solutions[-1])
+            solutions.append(new_sol)
+
+        return solutions
 
     def __next_solution__(self, solution):
         # sum without 0's, for eg: 199 + 1 = 211 (real:200)
@@ -34,6 +39,7 @@ class BruteForce:
         solution = int(str(solution).replace('0', '1'))
         if solution > self.max_solution:
             return None
+
         return solution
 
     def __valid_solution__(self, solution):

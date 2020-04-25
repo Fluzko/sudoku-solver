@@ -13,8 +13,8 @@ sudoku = [
     [0, 4, 9, 2, 0, 6, 0, 0, 7]
 ]
 
-# choose one of: 'backtrack' | 'naive'
-algorithm = 'backtrack'
+# choose one of: 'backtrack' | 'naive' (probably infinite)
+algorithm = 'naive'
 
 # choose one of: 'console'
 graph = 'console'
